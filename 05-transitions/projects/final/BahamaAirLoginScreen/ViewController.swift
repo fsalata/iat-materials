@@ -127,7 +127,25 @@ class ViewController: UIViewController {
                     self.loginButton.center.y -= 30.0
                     self.loginButton.alpha = 1.0
     }, completion: nil)
+
+    animte(cloud1)
+    animte(cloud2)
+    animte(cloud3)
+    animte(cloud4)
   }
+
+    func animte(_ cloud: UIImageView) {
+        let speed = 60 / view.frame.size.width
+        let duration = (view.frame.size.width - cloud.frame.origin.x) * speed
+
+        UIView.animate(withDuration: TimeInterval(duration), delay: 0, options: .curveLinear) {
+            cloud.frame.origin.x = self.view.frame.size.width
+        } completion: { _ in
+            cloud.frame.origin.x = -cloud.frame.size.width
+            self.animte(cloud)
+        }
+
+    }
 
   func showMessage(index: Int) {
     label.text = messages[index]
